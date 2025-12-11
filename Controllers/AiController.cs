@@ -17,7 +17,7 @@ namespace FitnessProje.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> GeneratePlan(int age, int weight, int height, string goal, string gender)
         {
-            string apiKey = "AIzaSyAq0N_JiM0scDbds_CaJrBunZO660X1VwU"; 
+            string apiKey = "api gelecek"; 
 
             string prompt = $"Sen profesyonel bir fitness antrenörüsün. " +
                             $"Danışan bilgileri: Cinsiyet: {gender}, Yaş: {age}, Kilo: {weight}kg, Boy: {height}cm. " +
