@@ -1,0 +1,39 @@
+@model FitnessProje.Web.Models.Service
+
+@{
+    ViewData["Title"] = "Hizmet Ekle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4>Yeni Hizmet Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateService" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Örn: Pilates" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Duration" class="form-label"></label>
+                        <input asp-for="Duration" class="form-control" type="number" placeholder="Örn: 60" />
+                        <span asp-validation-for="Duration" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" class="form-control" type="number" placeholder="Örn: 500" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                        <a asp-action="Services" class="btn btn-secondary">İptal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

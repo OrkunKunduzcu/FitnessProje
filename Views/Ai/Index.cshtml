@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Gemini AI Koçu";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: var(--primary-yellow) !important;">✨ Gemini AI Fitness Koçu</h1>
+        <p class="lead text-white">Google Gemini yapay zekası ile sana özel program hazırlayalım.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow bg-dark border-secondary">
+                <div class="card-header bg-primary text-white text-center fw-bold" style="background-color: #0d6efd !important;">
+                    Vücut Analizi
+                </div>
+                <div class="card-body">
+                    <form asp-action="GeneratePlan" method="post">
+                        <div class="mb-3">
+                            <label class="form-label text-white">Cinsiyet</label>
+                            <select name="gender" class="form-select">
+                                <option value="Kadın">Kadın</option>
+                                <option value="Erkek">Erkek</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Yaşınız</label>
+                            <input type="number" name="age" class="form-control" required placeholder="Örn: 22" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Kilonuz (kg)</label>
+                            <input type="number" name="weight" class="form-control" required placeholder="Örn: 75" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Boyunuz (cm)</label>
+                            <input type="number" name="height" class="form-control" required placeholder="Örn: 180" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Hedefiniz</label>
+                            <select name="goal" class="form-select">
+                                <option value="Hızlı Kilo Vermek">Hızlı Kilo Vermek</option>
+                                <option value="Kas Kütlesini Artırmak">Kas Kütlesini Artırmak</option>
+                                <option value="Fit ve Sıkı Görünmek">Fit ve Sıkı Görünmek</option>
+                            </select>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-warning btn-lg fw-bold text-dark">
+                                ✨ Gemini ile Oluştur
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+
+            @if (ViewBag.IsResult == true)
+            {
+                <div class="card shadow bg-dark border-warning h-100">
+                    <div class="card-header bg-warning text-dark text-center fw-bold">
+                        📋 Gemini Tarafından Hazırlanan Plan
+                    </div>
+                    <div class="card-body text-white">
+                        <div class="alert alert-info text-dark fw-bold">
+                            Vücut Kitle İndeksin (VKİ): @ViewBag.Bmi
+                        </div>
+
+                        <div class="ai-response" style="line-height: 1.8; color: #e0e0e0;">
+                            @Html.Raw(ViewBag.Result)
+                        </div>
+
+                        <div class="mt-4 text-center border-top border-secondary pt-3">
+                            <p class="small text-muted">Powered by Google Gemini AI</p>
+                            <a href="/Appointment" class="btn btn-outline-light">Bu Plana Uygun Randevu Al</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card bg-transparent border-0 text-center mt-5">
+                    <p class="display-1">🤖</p>
+                    <p class="mt-3 fs-5" style="color: #cccccc;">
+                        Google Gemini AI asistanı hazır. <br>
+                        Bilgilerini gir, saniyeler içinde sana özel programı yazsın.
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

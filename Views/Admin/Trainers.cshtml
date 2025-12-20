@@ -1,0 +1,61 @@
+@model IEnumerable<FitnessProje.Web.Models.Trainer>
+
+@{
+    ViewData["Title"] = "Antrenör Yönetimi";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
+        <h2 class="text-white fw-bold">🏋️‍♂️ Antrenör Kadrosu</h2>
+        <a asp-action="CreateTrainer" class="btn btn-success fw-bold shadow">+ Yeni Antrenör Ekle</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success border-0 shadow-sm">@TempData["Success"]</div>
+    }
+
+    <div class="card bg-dark border-secondary shadow-lg">
+        <div class="card-body p-0">
+            <table class="table table-dark table-hover mb-0 align-middle">
+                <thead class="bg-secondary text-warning">
+                    <tr>
+                        <th class="ps-4">Fotoğraf</th>
+                        <th>Ad Soyad</th>
+                        <th>Uzmanlık</th>
+                        <th class="text-end pe-4">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-4">
+                                <img src="@item.ImageUrl" alt="@item.FullName" class="rounded-circle border border-warning" width="60" height="60" style="object-fit: cover;" />
+                            </td>
+                            <td class="text-white fw-bold fs-5">@item.FullName</td>
+                            <td class="text-white-50">@item.Expertise</td>
+                            <td class="text-end pe-4">
+                                <a asp-action="EditTrainer" asp-route-id="@item.Id" class="btn btn-primary btn-sm me-1 fw-bold">
+                                    ✏️ Düzenle
+                                </a>
+                                <a asp-action="DeleteTrainer" asp-route-id="@item.Id" 
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu antrenörü silmek istediğinize emin misiniz?');">
+                                   🗑️ Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5 text-muted">
+                    <p>Henüz kayıtlı antrenör yok.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+@model FitnessProje.Web.Models.Appointment
+
+@{
+    ViewData["Title"] = "Yeni Randevu Al";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-dark border-secondary shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-3" style="background-color: #0d6efd !important;">
+                    <h3 class="fw-bold mb-0">🗓️ Yeni Randevu Oluştur</h3>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <form asp-action="Create" method="post">
+                        
+                        <div class="mb-4">
+                            <label class="form-label text-white fw-bold">Hizmet Seçiniz</label>
+                            <select asp-for="ServiceId" id="ServiceSelect" class="form-select bg-dark text-white border-secondary" required>
+                                <option value="" data-price="0" data-duration="0">-- Hizmet Seçin --</option>
+                                @foreach (var service in ViewBag.Services as List<FitnessProje.Web.Models.Service>)
+                                {
+                                    <option value="@service.Id" 
+                                            data-name="@service.Name"
+                                            data-price="@service.Price" 
+                                            data-duration="@service.Duration">
+                                            @service.Name
+                                    </option>
+                                }
+                            </select>
+                            
+                            <div id="serviceInfo" class="alert alert-info mt-2 d-none">
+                                ⏱️ <strong>Süre:</strong> <span id="durationSpan">0</span> dk | 
+                                💰 <strong>Ücret:</strong> <span id="priceSpan">0</span> ₺
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label text-white fw-bold">Antrenör Seçiniz</label>
+                            <select asp-for="TrainerId" id="TrainerSelect" class="form-select bg-dark text-white border-secondary" required>
+                                <option value="">-- Önce Hizmet Seçiniz --</option>
+                                @foreach (var trainer in ViewBag.Trainers as List<FitnessProje.Web.Models.Trainer>)
+                                {
+                                    <option value="@trainer.Id" data-expertise="@trainer.Expertise">
+                                        @trainer.FullName (@trainer.Expertise)
+                                    </option>
+                                }
+                            </select>
+                            <div class="form-text text-muted small fst-italic mt-1">
+                                * Seçtiğiniz hizmete uzmanlığı uyan eğitmenler listelenir.
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label text-white fw-bold">Tarih ve Saat</label>
+                            <input asp-for="AppointmentDate" id="dateInput" class="form-control bg-dark text-white border-secondary" 
+                                   type="datetime-local" required />
+                            <div class="form-text text-warning mt-1">
+                                🕒 Çalışma Saatleri: <strong>09:00 - 23:00</strong>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2">Randevuyu Onayla</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            // --- HİZMET VE EĞİTMEN FİLTRELEME & BİLGİ GÖSTERME ---
+            const serviceSelect = document.getElementById("ServiceSelect");
+            const trainerSelect = document.getElementById("TrainerSelect");
+            const allTrainers = Array.from(trainerSelect.options);
+            
+            // Bilgi kutusu elemanları
+            const serviceInfoDiv = document.getElementById("serviceInfo");
+            const durationSpan = document.getElementById("durationSpan");
+            const priceSpan = document.getElementById("priceSpan");
+
+            serviceSelect.addEventListener("change", function () {
+                const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+                const selectedServiceName = selectedOption.getAttribute("data-name");
+                
+                // 1. Bilgi Kutusunu Güncelle
+                const price = selectedOption.getAttribute("data-price");
+                const duration = selectedOption.getAttribute("data-duration");
+
+                if (price && duration) {
+                    durationSpan.textContent = duration;
+                    priceSpan.textContent = price;
+                    serviceInfoDiv.classList.remove("d-none"); // Kutuyu göster
+                } else {
+                    serviceInfoDiv.classList.add("d-none"); // Kutuyu gizle
+                }
+
+                // 2. Eğitmenleri Filtrele
+                trainerSelect.value = ""; // Seçimi sıfırla
+                
+                allTrainers.forEach(option => {
+                    if (option.value === "") return;
+
+                    const expertise = option.getAttribute("data-expertise");
+                    
+                    if (!selectedServiceName) {
+                        option.hidden = false;
+                        option.disabled = false;
+                    } else {
+                        if (expertise && expertise.includes(selectedServiceName)) {
+                            option.hidden = false;
+                            option.disabled = false;
+                        } else {
+                            option.hidden = true;
+                            option.disabled = true;
+                        }
+                    }
+                });
+            });
+
+            // --- SAAT KONTROLÜ ---
+            const dateInput = document.getElementById("dateInput");
+            dateInput.addEventListener("change", function () {
+                const selectedDate = new Date(this.value);
+                const hour = selectedDate.getHours();
+                if (hour < 9 || hour >= 23) {
+                    alert("⚠️ Salonumuz 09:00 - 23:00 saatleri arasında açıktır.");
+                    this.value = "";
+                }
+            });
+        });
+    </script>
+}

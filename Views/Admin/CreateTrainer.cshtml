@@ -1,0 +1,42 @@
+@model FitnessProje.Web.Models.Trainer
+
+@{
+    ViewData["Title"] = "Antrenör Ekle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4>Yeni Antrenör Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateTrainer" method="post" enctype="multipart/form-data">
+                    
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label"></label>
+                        <input asp-for="FullName" class="form-control" placeholder="Örn: Ahmet Yılmaz" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Expertise" class="form-label"></label>
+                        <input asp-for="Expertise" class="form-control" placeholder="Örn: Fitness & Bodybuilding" />
+                        <span asp-validation-for="Expertise" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Antrenör Fotoğrafı</label>
+                        <input type="file" name="imageFile" class="form-control" accept="image/*" />
+                        <small class="text-muted">Lütfen .jpg veya .png formatında resim yükleyiniz.</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                        <a asp-action="Trainers" class="btn btn-secondary">İptal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

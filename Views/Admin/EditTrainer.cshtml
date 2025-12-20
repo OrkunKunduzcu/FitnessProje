@@ -1,0 +1,56 @@
+@model FitnessProje.Web.Models.Trainer
+
+@{
+    ViewData["Title"] = "Antrenör Düzenle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark border-secondary shadow-lg">
+                <div class="card-header border-secondary bg-transparent">
+                    <h3 class="text-warning fw-bold mb-0">🏋️‍♂️ Antrenör Bilgilerini Düzenle</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditTrainer" method="post" enctype="multipart/form-data">
+                        
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="ImageUrl" />
+
+                        <div class="text-center mb-4">
+                            <label class="form-label text-white d-block">Mevcut Fotoğraf</label>
+                            <img src="@Model.ImageUrl" class="rounded-circle border border-warning shadow" width="120" height="120" style="object-fit: cover;" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-white">Ad Soyad</label>
+                            <input asp-for="FullName" class="form-control bg-dark text-white border-secondary" required />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label text-white">Uzmanlık Alanı</label>
+                            <select asp-for="Expertise" class="form-select bg-dark text-white border-secondary">
+                                <option value="Fitness ve Bodybuilding">Fitness ve Bodybuilding</option>
+                                <option value="Pilates">Pilates</option>
+                                <option value="Yoga">Yoga</option>
+                                <option value="Kardiyo">Kardiyo</option>
+                                <option value="Beslenme Uzmanı">Beslenme Uzmanı</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label text-white">Yeni Fotoğraf Yükle (İsteğe Bağlı)</label>
+                            <input type="file" name="imageFile" class="form-control bg-dark text-white border-secondary" accept="image/*" />
+                            <div class="form-text text-muted">Eğer fotoğrafı değiştirmek istemiyorsanız boş bırakın.</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold">💾 Değişiklikleri Kaydet</button>
+                            <a asp-action="Trainers" class="btn btn-outline-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

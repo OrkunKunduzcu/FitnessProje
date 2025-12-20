@@ -1,0 +1,83 @@
+@model IEnumerable<FitnessProje.Web.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Randevu Yönetimi";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-warning pb-3">
+        <h2 class="text-white fw-bold">🗓️ Gelen Randevu Talepleri</h2>
+        <span class="badge bg-warning text-dark">Yönetici Paneli</span>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success border-0 shadow-sm">@TempData["Success"]</div>
+    }
+
+    <div class="card bg-dark border-secondary shadow-lg">
+        <div class="card-body p-0">
+            <table class="table table-dark table-hover mb-0 align-middle text-center">
+                <thead class="text-warning bg-secondary">
+                    <tr>
+                        <th>Üye Adı</th>
+                        <th>Hizmet</th>
+                        <th>Antrenör</th>
+                        <th>Tarih</th>
+                        <th>Şu Anki Durum</th>
+                        <th>İşlemler (Karar)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold text-start ps-4">
+                                @if(item.AppUser != null) { @item.AppUser.FullName } else { <span class="text-muted">Silinmiş Üye</span> }
+                                <div class="small text-muted">@item.AppUser?.Email</div>
+                            </td>
+                            <td><span class="badge bg-secondary">@item.Service?.Name</span></td>
+                            <td>@item.Trainer?.FullName</td>
+                            <td>@item.AppointmentDate.ToString("dd.MM.yyyy HH:mm")</td>
+                            
+                            <td>
+                                @if (item.Status == "Bekliyor")
+                                {
+                                    <span class="badge bg-warning text-dark px-3 py-2">⏳ Bekliyor</span>
+                                }
+                                else if (item.Status == "Onaylandı")
+                                {
+                                    <span class="badge bg-success px-3 py-2">✅ Onaylandı</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger px-3 py-2">❌ Reddedildi</span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (item.Status == "Bekliyor")
+                                {
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="ApproveAppointment" asp-route-id="@item.Id" class="btn btn-success btn-sm fw-bold">✔ Onayla</a>
+                                        <a asp-action="RejectAppointment" asp-route-id="@item.Id" class="btn btn-danger btn-sm fw-bold ms-1">✖ Reddet</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small fst-italic">İşlem yapıldı</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (!Model.Any())
+            {
+                <div class="p-5 text-center text-muted">
+                    <p>Henüz bekleyen veya geçmiş randevu talebi yok.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

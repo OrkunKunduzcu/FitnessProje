@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = "Yönetim Paneli";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-white">⚡ Yönetim Paneli</h1>
+        <p class="lead text-muted">Spor salonunun kontrol merkezi.</p>
+    </div>
+
+    <div class="row g-4"> 
+        <div class="col-md-3">
+            <div class="card h-100 bg-dark border-secondary shadow-lg">
+                <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="display-4 mb-3">🏋️‍♂️</div>
+                        <h3 class="text-warning fw-bold h4">Eğitmenler</h3>
+                        <p class="text-secondary small">Antrenör kadrosunu yönet.</p>
+                    </div>
+                    <a asp-action="Trainers" class="btn btn-outline-warning fw-bold w-100 mt-3">Yönet</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 bg-dark border-secondary shadow-lg">
+                <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="display-4 mb-3">🛠️</div>
+                        <h3 class="text-warning fw-bold h4">Hizmetler</h3>
+                        <p class="text-secondary small">Ders ve ücretleri ayarla.</p>
+                    </div>
+                    <a asp-action="Services" class="btn btn-outline-warning fw-bold w-100 mt-3">Yönet</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 bg-dark border-warning shadow-lg">
+                <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="display-4 mb-3">📅</div>
+                        <h3 class="text-warning fw-bold h4">Randevular</h3>
+                        <p class="text-white small">Randevu taleplerini onayla/reddet.</p>
+                    </div>
+                    <a asp-action="Appointments" class="btn btn-outline-warning fw-bold w-100 mt-3">Kontrol Et</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 bg-dark border-secondary shadow-lg">
+                <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="display-4 mb-3">👥</div>
+                        <h3 class="text-warning fw-bold h4">Kullanıcılar</h3>
+                        <p class="text-secondary small">Üyeleri listele ve yönet.</p>
+                    </div>
+                    <a asp-action="Users" class="btn btn-outline-warning fw-bold w-100 mt-3">Listele</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

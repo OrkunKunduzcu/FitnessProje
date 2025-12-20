@@ -1,0 +1,53 @@
+@model FitnessProje.Web.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card bg-dark border-warning shadow-lg">
+                <div class="card-header bg-black border-bottom border-warning text-center py-3">
+                    <h3 class="text-warning fw-bold mb-0">🔑 Giriş Yap</h3>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-controller="Account" asp-action="Login" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-white">Email Adresi</label>
+                            <input asp-for="Email" class="form-control bg-secondary text-white border-0" placeholder="mail@ornek.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-white">Şifre</label>
+                            <input asp-for="Password" type="password" class="form-control bg-secondary text-white border-0" placeholder="******" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input bg-secondary border-0" asp-for="RememberMe" />
+                            <label class="form-check-label text-white" asp-for="RememberMe">
+                                Beni Hatırla
+                            </label>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-warning fw-bold text-dark py-2">
+                                Giriş Yap
+                            </button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted">Hesabın yok mu?</span>
+                            <a asp-controller="Account" asp-action="Register" class="text-warning fw-bold ms-1">Kayıt Ol</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

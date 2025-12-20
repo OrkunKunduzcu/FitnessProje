@@ -1,0 +1,59 @@
+@model IEnumerable<FitnessProje.Web.Models.Service>
+
+@{
+    ViewData["Title"] = "Hizmet Yönetimi";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
+        <h2 class="text-white fw-bold">🛠️ Hizmet Listesi</h2>
+        <a asp-action="CreateService" class="btn btn-warning fw-bold shadow">+ Yeni Hizmet Ekle</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success border-0 shadow-sm">@TempData["Success"]</div>
+    }
+
+    <div class="card bg-dark border-secondary shadow-lg">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Hizmet Adı</th>
+                        <th>Süre (Dk)</th>
+                        <th>Fiyat (TL)</th>
+                        <th class="text-end pe-4">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 fw-bold fs-5">@item.Name</td>
+                            <td>@item.Duration dk</td>
+                            <td class="text-warning fw-bold">@item.Price ₺</td>
+                            <td class="text-end pe-4">
+                                <a asp-action="EditService" asp-route-id="@item.Id" class="btn btn-primary btn-sm me-1 fw-bold">
+                                    ✏️ Düzenle
+                                </a>
+                                <a asp-action="DeleteService" asp-route-id="@item.Id" 
+                                   class="btn btn-danger btn-sm fw-bold"
+                                   onclick="return confirm('Bu hizmeti silmek istediğinize emin misiniz?');">
+                                   🗑️ Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5 text-muted">
+                    <p>Henüz kayıtlı hizmet bulunmamaktadır.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
