@@ -23,4 +23,4 @@ namespace FitnessProje.Web.ViewModels
         [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
     }
-}
+} 

@@ -17,4 +17,4 @@ namespace FitnessProje.Web.ViewModels
         [Display(Name = "Beni Hatırla")]
         public bool RememberMe { get; set; }
     }
-}
+} 
