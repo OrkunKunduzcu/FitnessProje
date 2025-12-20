@@ -17,4 +17,4 @@ namespace FitnessProje.Web.Models
         [Display(Name = "Fotoğraf Yolu")]
         public string? ImageUrl { get; set; }
     }
-}
+} 

@@ -33,4 +33,4 @@ namespace FitnessProje.Web.Models
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
-}
+} 

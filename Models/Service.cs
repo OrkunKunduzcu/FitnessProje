@@ -18,4 +18,4 @@ namespace FitnessProje.Web.Models
         [Required(ErrorMessage = "Ücret bilgisi zorunludur.")]
         public decimal Price { get; set; }
     }
-}
+} 

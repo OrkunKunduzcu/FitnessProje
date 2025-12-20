@@ -25,3 +25,4 @@ namespace FitnessProje.Web.Models
         public double? Weight { get; set; }
     }
 }// Model güncellendi
+ 
