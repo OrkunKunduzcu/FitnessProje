@@ -401,3 +401,4 @@ namespace FitnessProje.Web.Migrations
         }
     }
 }
+ 

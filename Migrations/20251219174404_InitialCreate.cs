@@ -316,3 +316,4 @@ namespace FitnessProje.Web.Migrations
         }
     }
 }
+ 
