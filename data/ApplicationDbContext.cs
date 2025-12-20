@@ -23,3 +23,4 @@ namespace FitnessProje.Web.Data
         }
     }
 }// DbContext context updated
+ 

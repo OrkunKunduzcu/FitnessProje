@@ -44,4 +44,4 @@ namespace FitnessProje.Web.Data
             }
         }
     }
-}
+} 
