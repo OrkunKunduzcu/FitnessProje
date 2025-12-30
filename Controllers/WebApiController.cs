@@ -28,7 +28,7 @@ namespace FitnessProje.Web.Controllers
                     t.FullName,
                     t.Expertise,
                     // Resim yolunu tam adres olarak verelim ki mobilde de açılsın
-                    ImageUrl = "https://localhost:7000" + t.ImageUrl 
+                    ImageUrl = "https://localhost:5292" + t.ImageUrl 
                 })
                 .ToListAsync();
 
