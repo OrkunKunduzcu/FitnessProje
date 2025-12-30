@@ -23,33 +23,4 @@ GYM-PRO, spor salonu üyelerinin kolayca randevu alabilmesini, yapay zeka destek
 * **Veritabanı:** PostgreSQL / Entity Framework Core (Code First)
 * **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5
 * **AI API:** Google Gemini AI
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+
